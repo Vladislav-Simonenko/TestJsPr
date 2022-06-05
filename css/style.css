@@ -1,0 +1,286 @@
+@charset "UTF-8";
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*--------------------*/
+body {
+  background-color: white;
+  font-size: 18px;
+  color: black;
+  text-align: center;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: minmax(100px, auto) 1fr minmax(100px, auto);
+  -ms-grid-columns: 1fr;
+      grid-template: minmax(100px, auto) 1fr minmax(100px, auto)/1fr;
+}
+
+.todoListsTask {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: minmax(100px, auto) minmax(200px, auto) minmax(20px, auto) minmax(200px, auto) minmax(100px, auto);
+      grid-template: 1fr/minmax(100px, auto) minmax(200px, auto) minmax(20px, auto) minmax(200px, auto) minmax(100px, auto);
+}
+.todoListsTask__list {
+  background-color: lightblue;
+  border: 1px solid black;
+  border-radius: 2px;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: minmax(10px, auto) 1fr minmax(100px, auto);
+  -ms-grid-columns: 1fr;
+      grid-template: minmax(10px, auto) 1fr minmax(100px, auto)/1fr;
+}
+.todoListsTask__tasks {
+  -ms-grid-row: 2;
+  grid-row: 2/2;
+}
+.todoListsTask__tasks-secondWindow {
+  -ms-grid-row: 4;
+  grid-row: 4/4;
+}
+.todoListsTask__creator {
+  -ms-grid-row: 3;
+  grid-row: 3/3;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+.todoListsTask__creator .createNameList {
+  min-width: 200px;
+  min-height: 30px;
+  border: 1px solid black;
+}
+.todoListsTask__creator .createNewTodo {
+  min-width: 195px;
+  min-height: 30px;
+  border: 1px solid black;
+  background-color: #b6d7a8;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+.todoListsTask__creator-secondCreator {
+  -ms-grid-row: 5;
+  grid-row: 5/5;
+}
+.todoListsTask__creator-secondCreator .createNameList {
+  min-width: 200px;
+  min-height: 30px;
+  border: 1px solid black;
+}
+.todoListsTask__creator-secondCreator .createNewTodo {
+  min-width: 195px;
+  min-height: 30px;
+  border: 1px solid black;
+  background-color: #b6d7a8;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+.todoListsTask__details {
+  background-color: lightblue;
+  border: 3px solid black;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 1;
+  grid-column: 4/5;
+}
+.todoListsTask__heading {
+  position: absolute;
+  top: 30px;
+  font-size: 36px;
+}
+.todoListsTask__details {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: minmax(10px, auto) minmax(10px, auto) minmax(50px, auto) 1fr minmax(200px, auto);
+  -ms-grid-columns: 1fr;
+      grid-template: minmax(10px, auto) minmax(10px, auto) minmax(50px, auto) 1fr minmax(200px, auto)/1fr;
+}
+.todoListsTask__details-complited {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+  -ms-grid-columns: minmax(30px, auto) 1fr;
+      grid-template: 1fr 1fr/minmax(30px, auto) 1fr;
+  -ms-grid-row: 3;
+  grid-row: 3/3;
+}
+.todoListsTask__details-search {
+  -ms-grid-row: 2;
+  grid-row: 2/2;
+}
+
+.todo-item {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: minmax(10px, auto) minmax(10px, auto) 1fr;
+      grid-template: 1fr/minmax(10px, auto) minmax(10px, auto) 1fr;
+}
+
+.buttons {
+  -ms-grid-column: 1;
+  grid-column: 1/1;
+}
+
+.description {
+  -ms-grid-column: 2;
+  grid-column: 2/2;
+}
+
+.descriptionLabel {
+  -ms-grid-column: 4;
+  grid-column: 4/4;
+}
+
+.filrersChoise {
+  -ms-grid-row: 1;
+  grid-row: 1/1;
+  text-align: left;
+}
+
+.secondFilter {
+  -ms-grid-row: 2;
+  grid-row: 2/2;
+  padding: 0 0 10px 0;
+  text-align: left;
+}
+
+.todo-seconditem {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: minmax(10px, auto) minmax(10px, auto) 1fr;
+      grid-template: 1fr/minmax(10px, auto) minmax(10px, auto) 1fr;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.second-buttons {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 1;
+  grid-column: 4/5;
+}
+
+.secondDescription {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.hide {
+  display: none;
+}
+
+.checked {
+  text-decoration: underline;
+  font-weight: 900;
+}
+
+.completeds {
+  text-decoration: line-through;
+}
+
+.filters {
+  min-width: 200px;
+  min-height: 30px;
+  border: 1px solid black;
+}
+
+.deleteTodo {
+  background-color: rgba(0, 0, 0, 0);
+  color: red;
+  padding: 5px;
+}

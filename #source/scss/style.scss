@@ -1,0 +1,168 @@
+// Файл обнуляющих стилей
+@import "nullstyle.scss";
+
+body{
+	background-color: white;
+	font-size: 18px;
+	color: black;
+	text-align: center;
+}
+
+.wrapper{
+	min-height: 100%;
+	display: grid;
+grid-template: minmax(100px, auto) 1fr minmax(100px, auto) / 1fr;
+}
+
+.todoListsTask{
+grid-row: 2/3;
+display: grid;
+//изменнять размеры бокса тут
+grid-template: 1fr / minmax(100px, auto) minmax(200px, auto) minmax(20px, auto) minmax(200px, auto) minmax(100px, auto);
+&__list{
+	background-color: lightblue;
+	border: 1px solid black;
+	border-radius: 2px;
+	grid-column: 2/3;
+	display: grid;
+	grid-template: minmax(10px, auto) 1fr minmax(100px, auto) / 1fr;
+}
+
+&__tasks{
+	grid-row: 2/2;
+&-secondWindow{
+	grid-row: 4/4;
+}
+}
+&__creator{
+	grid-row: 3/3;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+
+	& .createNameList{
+		min-width: 200px;
+		min-height: 30px;
+		border: 1px solid black;
+	}
+	& .createNewTodo{
+		min-width: 195px;
+		min-height: 30px;
+		border: 1px solid black;
+		background-color: #b6d7a8;
+		border-radius: 5px;
+		font-size: 20px;
+		text-align: center;
+	}
+	&-secondCreator{
+		grid-row: 5/5;
+		& .createNameList{
+			min-width: 200px;
+			min-height: 30px;
+			border: 1px solid black;
+		}
+		& .createNewTodo{
+			min-width: 195px;
+			min-height: 30px;
+			border: 1px solid black;
+			background-color: #b6d7a8;
+			border-radius: 5px;
+			font-size: 20px;
+			text-align: center;
+		}
+	}
+}
+&__details{
+	background-color: lightblue;
+	border: 3px solid black;
+	grid-column: 4/5;
+}
+&__heading{
+position: absolute;
+top: 30px;
+font-size: 36px;
+}
+&__details{
+	display: grid;
+	grid-template: minmax(10px, auto) minmax(10px, auto) minmax(50px, auto) 1fr minmax(200px, auto)  / 1fr;
+	&-complited{
+		display: grid;
+		grid-template: 1fr 1fr / minmax(30px, auto) 1fr;
+		grid-row: 3/3;
+	}&-search{
+		grid-row: 2/2;
+	}
+}
+}
+
+//конструкторные итемы
+
+.todo-item{
+	display: grid;
+	grid-template: 1fr / minmax(10px, auto) minmax(10px, auto) 1fr;
+}
+
+.buttons{
+	grid-column: 1/1;
+}
+.description{
+	grid-column: 2/2;
+
+}
+.descriptionLabel {
+		grid-column: 4/4;
+	}
+
+.filrersChoise{
+	grid-row: 1/1;
+	text-align: left;
+}
+
+.secondFilter{
+	grid-row: 2/2;
+	padding: 0 0 10px 0;
+	text-align: left;
+}
+
+
+// второй лист
+.todo-seconditem{
+	display: grid;
+	grid-template: 1fr / minmax(10px, auto) minmax(10px, auto) 1fr;
+	font-size: 24px;
+	font-weight: 700;
+}
+.second-buttons{
+	grid-column: 4/5;
+}
+.secondDescription{
+	grid-column: 2/3;
+}
+
+//мелкие кнопки
+.active{
+	text-decoration: underline;
+}
+.hide{
+	display: none;
+}
+
+.checked{
+	text-decoration: underline;
+	font-weight: 900;
+}
+.completeds{
+	text-decoration: line-through;
+}
+.filters{
+	min-width: 200px;
+	min-height: 30px;
+	border: 1px solid black;
+}
+
+.deleteTodo{
+	background-color: rgba(0, 0, 0, 0);
+	color: red;
+	padding: 5px;
+}

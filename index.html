@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\style.css">
+    <title>Тест задание</title>
+  </head>
+
+<body>
+  <div class="wrapper">
+   <!-- Начало основного контейнера -->
+    <div class="todoListsTask">
+     <!-- Начало основного Контента -->
+
+        <!-- Начало первого листа контейнера -->
+      <div class="todoListsTask__list">
+       <h2 class="todoListsTask__heading">ToDo lists</h2>
+
+        <div class="todoListsTask__tasks">
+
+        </div>
+
+
+          <form name="createForm" class="todoListsTask__creator" action="#" >
+          <input  type="text" name="nameInput" value="" class="createNameList" placeholder=" New list...">
+          <button type="button" name="button" class="createNewTodo">Create</button>
+        </form>
+
+      </div>
+
+   <!-- конец первого листа контейнера -->
+
+   <!-- Начало второго листа контейнера -->
+      <div class="todoListsTask__details">
+        <div class="todoListsTask__details-search">
+          <form class="searcher" action="#">
+            <input class="filters" type="text" name="nameSearcher" placeholder=" Search..." id="elastic">
+          </form>
+        </div>
+
+        <div class="todoListsTask__details-complited">
+          <div class="filrersChoise active" id="btnAllDiv">
+          <input id="btnall" type="radio" name="correctChoise" value="All" checked >
+          <label for="btnall">All</label>
+          </div>
+
+          <div class="filrersChoise secondFilter" id="btnUndoneDiv">
+          <input  id="completeds"type="radio" name="correctChoise" value="Undone" >
+          <label for="completeds">Undone</label>
+          </div>
+        </div>
+
+        <div class="todoListsTask__tasks-secondWindow">
+
+          </div>
+
+
+
+        <form name="createSecondForm" class="todoListsTask__creator-secondCreator" action="#" >
+        <input  type="text" name="nameSecondInput" value="" class="createNameList" placeholder=" Add ToDo">
+      </form>
+
+      </div>
+   <!-- Конец второго листа контейнера -->
+
+    <!-- Конец основного Контента -->
+    </div>
+    <!--Конец основного контейнера-->
+  </div>
+<script src="js\script.js"></script>
+</body>
+</html>
