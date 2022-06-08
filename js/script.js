@@ -1,4 +1,112 @@
+//ПЕРВАЯ СТРАНИЦА
 
+//получение данных из html
+const mainForms = document.forms.createForm;
+const createTodoInput = mainForms.nameInput;
+const addButton = mainForms.button;
+
+const taskList = document.querySelector(".todoListsTask__tasks");
+
+//создание массива
+let todoList;
+!localStorage.tasks ? todoList = [] : todoList = JSON.parse(localStorage.getItem("tasks"))
+
+let todoItemElems =[];
+
+
+//конструктор задач
+function Task(description) {
+  this.description = description;
+  this.completed = false;
+}
+
+
+//создание шаблона для авто генерации задач
+const createTemplate = (task, i) => {
+  return `
+  <div class="todo-item ${task.completed ? "checked" : ""}">
+    <div class="buttons">
+      <button onclick="deleteTask(${i})" class="deleteTodo">X</button>
+    </div>
+  <div id=page${i}>
+<a href="#" onclick="secondConstruction();">${task.description}</a>
+  </div>
+  `
+}
+
+
+
+//заполнение списка
+const createList = () => {
+  taskList.innerHTML = "";
+  if (todoList.length > 0) {
+    todoList.forEach((item, i) => {
+      taskList.innerHTML += createTemplate(item, i);
+    });
+    todoItemElems = document.querySelectorAll(".todo-item");
+
+    //добавление класса при клике по ссылке
+    listId = document.querySelectorAll(".todo-item a");
+      listId.forEach(item =>{
+       item.addEventListener('click', (e) =>{
+         listId.forEach(el => { el.classList.remove("checked"); });
+          item.classList.add("checked")
+   })
+})
+  }
+}
+createList();
+//создание переменной в локал сторейдж
+const updateLocalStorage = () => {
+  localStorage.setItem("tasks", JSON.stringify(todoList));
+    localStorage.setItem(`secondTasks${todoList.length}`, JSON.stringify(todoSecondList));
+}
+
+//выбор задачи для вывода подзадач
+const completeTask = i => {
+  todoList[i].completed = !todoList[i].completed;
+  if (todoList[i].completed) {
+    todoItemElems[i].classList.add("checked")
+  }else {
+    todoItemElems[i].classList.remove("checked")
+  }
+  updateLocalStorage();
+  createList();
+}
+
+//вызов конструктора по клику
+
+createTodoInput.addEventListener('keydown', function(event) {
+    if(event.keyCode == 13) {
+      todoList.push(new Task(createTodoInput.value));
+      updateLocalStorage();
+      createList();
+      createTodoInput.value ="";
+      window.location.reload();
+    }
+
+ });
+addButton.addEventListener("click",function () {
+  todoList.push(new Task(createTodoInput.value));
+  updateLocalStorage();
+  createList();
+  createTodoInput.value ="";
+})
+
+//удаление мейн таска
+const deleteTask = i => {
+  todoList.splice(i, 1);
+  updateLocalStorage();
+  createList();
+}
+
+//отмена отправки формы по ENTER
+mainForms.addEventListener('keydown', function(event) {
+    if(event.keyCode == 13) {
+        event.preventDefault();
+    }
+
+ });
 
 // ВТОРАЯ СТРАНИЦА
 const secondForm = document.forms.createSecondForm;
@@ -7,10 +115,16 @@ const createTodoSecondInput = secondForm.nameSecondInput;
 const taskSecondList = document.querySelector(".todoListsTask__tasks-secondWindow");
 
 //создание массива
-let todoSecondList;
-!localStorage.secondTasks ? todoSecondList = [] : todoSecondList = JSON.parse(localStorage.getItem("secondTasks"));
+let i = todoList.length;
 
-let todoSecondItemElems =[];
+let todoSecondList;
+!localStorage.secondTasks1  ? todoSecondList = [] : todoSecondList = JSON.parse(localStorage.getItem(`secondTasks${i}`));
+
+function secondConstruction() {
+  console.log("доработать показ нужного ключа при клике.");
+}
+
+let todoSecondItemElems = [];
 
 //конструктор задач
 function TaskManager(secondDescription) {
@@ -21,7 +135,7 @@ function TaskManager(secondDescription) {
 //создание шаблона для авто генерации подзадач
 const createSecondTemplate = (task2, index) => {
   return `
-  <div class="todo-seconditem ${task2.secondCompleted ? "completeds" : ""}">
+  <div id="p${index}" class="todo-seconditem  ${task2.secondCompleted ? "completeds" : ""}">
       <label class="secondDescription" for="todo-seconditem"> ${task2.secondDescription}</label>
     <div class="second-buttons">
       <input onclick="completeSecondTask(${index})" type="checkbox" class="btn-complete" ${task2.secondCompleted ? "checked" : ""}>
@@ -51,10 +165,6 @@ const createSecondList = () => {
 }
 createSecondList();
 
-//создание переменной в локал сторейдж
-const updateSecondLocalStorage = () => {
-  localStorage.setItem("secondTasks", JSON.stringify(todoSecondList));
-}
 
 const completeSecondTask = index => {
   todoSecondList[index].secondCompleted = !todoSecondList[index].secondCompleted;
@@ -63,7 +173,7 @@ const completeSecondTask = index => {
   }else {
       todoSecondItemElems[index].classList.remove("completeds")
   }
-  updateSecondLocalStorage();
+  updateLocalStorage();
   createSecondList();
   window.location.reload();
 }
@@ -72,7 +182,7 @@ const completeSecondTask = index => {
 createTodoSecondInput.addEventListener("keydown", (event) => {
   if (event.keyCode == 13) {
   todoSecondList.push(new TaskManager(createTodoSecondInput.value));
-  updateSecondLocalStorage();
+  updateLocalStorage();
   createSecondList();
   createTodoSecondInput.value = "";
   window.location.reload();
@@ -82,7 +192,7 @@ createTodoSecondInput.addEventListener("keydown", (event) => {
 //удаление  таска
 const deleteSecondTask = index => {
   todoSecondList.splice(index, 1);
-  updateSecondLocalStorage();
+  updateLocalStorage();
   createSecondList();
   window.location.reload();
 }
@@ -145,106 +255,6 @@ searcher.oninput = function () {
 //отмена отправки формы по ENTER
 
 searcher.addEventListener('keydown', function(event) {
-    if(event.keyCode == 13) {
-        event.preventDefault();
-    }
-
- });
-
-
-//ПЕРВАЯ СТРАНИЦА
-
-//получение данных из html
-const mainForms = document.forms.createForm;
-const createTodoInput = mainForms.nameInput;
-const addButton = mainForms.button;
-
-const taskList = document.querySelector(".todoListsTask__tasks");
-
-//создание массива
-let todoList;
-!localStorage.tasks ? todoList = [] : todoList = JSON.parse(localStorage.getItem("tasks"))
-
-let todoItemElems =[];
-
-
-//конструктор задач
-function Task(description) {
-  this.description = description;
-  this.completed = false;
-}
-
-
-//создание шаблона для авто генерации задач
-const createTemplate = (task, i) => {
-  return `
-  <div class="todo-item ${task.completed ? "checked" : ""}">
-    <div class="buttons">
-      <input onclick="completeTask(${i})" type="checkbox" class="btn-complete" ${task.completed ? "checked" : ""}>
-      <button onclick="deleteTask(${i})" class="deleteTodo">X</button>
-    </div>
-    <div class="description">${task.description}</div>
-     <label class="descriptionLabel" for="description">(${todoSecondList.length} / ${todoSecondList.length})</label>
-  </div>
-  `
-}
-
-//заполнение списка
-const createList = () => {
-  taskList.innerHTML = "";
-  if (todoList.length > 0) {
-    todoList.forEach((item, i) => {
-      taskList.innerHTML += createTemplate(item, i);
-    });
-    todoItemElems = document.querySelectorAll(".todo-item");
-  }
-}
-createList();
-//создание переменной в локал сторейдж
-const updateLocalStorage = () => {
-  localStorage.setItem("tasks", JSON.stringify(todoList));
-}
-
-//выбор задачи для вывода подзадач
-const completeTask = i => {
-  todoList[i].completed = !todoList[i].completed;
-  if (todoList[i].completed) {
-    todoItemElems[i].classList.add("checked")
-  }else {
-    todoItemElems[i].classList.remove("checked")
-  }
-  updateLocalStorage();
-  createList();
-}
-
-//вызов конструктора по клику
-
-createTodoInput.addEventListener('keydown', function(event) {
-    if(event.keyCode == 13) {
-      todoList.push(new Task(createTodoInput.value));
-      updateLocalStorage();
-      createList();
-      createTodoInput.value ="";
-      window.location.reload();
-    }
-
- });
-addButton.addEventListener("click",function () {
-  todoList.push(new Task(createTodoInput.value));
-  updateLocalStorage();
-  createList();
-  createTodoInput.value ="";
-})
-
-//удаление мейн таска
-const deleteTask = i => {
-  todoList.splice(i, 1);
-  updateLocalStorage();
-  createList();
-}
-
-//отмена отправки формы по ENTER
-mainForms.addEventListener('keydown', function(event) {
     if(event.keyCode == 13) {
         event.preventDefault();
     }
