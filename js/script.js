@@ -29,7 +29,7 @@ const createTemplate = (task, i) => {
       <button onclick="deleteTask(${i})" class="deleteTodo">X</button>
     </div>
   <div id=page${i}>
-<a href="#" onclick="secondConstruction();">${task.description}</a>
+<a href="#" onclick="secondConstruction(${i});">${task.description}</a>
   </div>
   `
 }
@@ -120,9 +120,7 @@ let i = todoList.length;
 let todoSecondList;
 !localStorage.secondTasks1  ? todoSecondList = [] : todoSecondList = JSON.parse(localStorage.getItem(`secondTasks${i}`));
 
-function secondConstruction() {
-  console.log("доработать показ нужного ключа при клике.");
-}
+
 
 let todoSecondItemElems = [];
 
@@ -152,6 +150,8 @@ const filterTasks =() => {
   todoSecondList = [...activeTasks,...complitedTasks];
 }
 
+function secondConstruction(i) {
+
 //заполнение списка
 const createSecondList = () => {
    taskSecondList.innerHTML = "";
@@ -166,6 +166,24 @@ const createSecondList = () => {
 createSecondList();
 
 
+// фильтр для кнопок
+
+const filterBox = document.querySelectorAll(".todo-seconditem");
+document.querySelector(".todoListsTask__details-complited").addEventListener("click", (event) => {
+if (event.target.id == " ") return false;
+  let filterClass = event.target.id;
+  filterBox.forEach((elem) => {
+    elem.classList.remove("hide");
+    if (elem.classList.contains(filterClass) && filterClass !== "btnall") {
+      elem.classList.add("hide");
+    }
+
+  });
+
+});
+console.log("остался ток вывод определенного таска по клику.");
+}
+
 const completeSecondTask = index => {
   todoSecondList[index].secondCompleted = !todoSecondList[index].secondCompleted;
   if (todoSecondList[index].secondCompleted) {
@@ -174,8 +192,8 @@ const completeSecondTask = index => {
       todoSecondItemElems[index].classList.remove("completeds")
   }
   updateLocalStorage();
-  createSecondList();
-  window.location.reload();
+  secondConstruction();
+
 }
 
 //вызов конструктора по клику
@@ -183,9 +201,8 @@ createTodoSecondInput.addEventListener("keydown", (event) => {
   if (event.keyCode == 13) {
   todoSecondList.push(new TaskManager(createTodoSecondInput.value));
   updateLocalStorage();
-  createSecondList();
+  secondConstruction();
   createTodoSecondInput.value = "";
-  window.location.reload();
     }
 })
 
@@ -193,9 +210,11 @@ createTodoSecondInput.addEventListener("keydown", (event) => {
 const deleteSecondTask = index => {
   todoSecondList.splice(index, 1);
   updateLocalStorage();
-  createSecondList();
-  window.location.reload();
+  secondConstruction();
+
 }
+
+
 //отмена отправки формы по ENTER
 secondForm.addEventListener('keydown', function(event) {
     if(event.keyCode == 13) {
@@ -215,22 +234,8 @@ secondForm.addEventListener('keydown', function(event) {
    });
  }
 
-// фильтр для кнопок
-
-const filterBox = document.querySelectorAll(".todo-seconditem");
-document.querySelector(".todoListsTask__details-complited").addEventListener("click", (event) => {
-if (event.target.id == "") return false;
-  let filterClass = event.target.id;
-  filterBox.forEach((elem) => {
-    elem.classList.remove("hide");
-    if (elem.classList.contains(filterClass) && filterClass !== "btnall") {
-      elem.classList.add("hide");
-    }
-
-  });
 
 
-});
 //Поиск
 const searcher = document.getElementById('elastic');
 searcher.oninput = function () {
